@@ -1,5 +1,7 @@
 package com.example.spring_crud.controller;
 
+import com.example.spring_crud.mapper.UserDTO;
+import com.example.spring_crud.mapper.UserMapper;
 import com.example.spring_crud.model.User;
 import com.example.spring_crud.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/user")
 public class UserController {
 
     @Autowired
@@ -20,8 +22,9 @@ public class UserController {
     }
 
     @GetMapping("findUserById/{userId}")
-    public Optional<User> findUserById(@PathVariable("userId") long userId){
-        return userService.findById(userId);
+    public UserDTO findUserById(@PathVariable("userId") long userId){
+        User userData = userService.findById(userId);
+        return UserMapper.toUserDTO(userData);
     }
 
     @DeleteMapping("deleteUserbyId/{userId}")

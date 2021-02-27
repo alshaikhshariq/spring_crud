@@ -1,10 +1,19 @@
 package com.example.spring_crud.model;
 
+import lombok.*;
+
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.List;
 
 @Entity
-@Table(name = "users")
-public class User {
+@Table(name = "user")
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -19,45 +28,7 @@ public class User {
     @Column(name = "jobTitle")
     private String jobTitle;
 
-    public User() {
-    }
-
-    public User(Long id, String firstName, String lastName, String jobTitle) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.jobTitle = jobTitle;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getJobTitle() {
-        return jobTitle;
-    }
-
-    public void setJobTitle(String jobTitle) {
-        this.jobTitle = jobTitle;
-    }
+    @Column(name = "addresses")
+    @OneToMany(mappedBy = "userAccount", cascade = CascadeType.ALL)
+    private List<Address> addresses;
 }
