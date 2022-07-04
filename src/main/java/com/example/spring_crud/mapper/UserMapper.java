@@ -14,6 +14,7 @@ public class UserMapper {
                 .firstName(userDTO.getFirstName())
                 .lastName(userDTO.getLastName())
                 .jobTitle(userDTO.getJobTitle())
+                .addresses(AddressMapper.toAddresses(userDTO.getAddresses()))
                 .build();
     }
 
@@ -27,6 +28,7 @@ public class UserMapper {
                 .firstName(user.getFirstName())
                 .lastName(user.getLastName())
                 .jobTitle(user.getJobTitle())
+                .addresses(AddressMapper.toAddressDTOs(user.getAddresses()))
                 .build();
     }
 

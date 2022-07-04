@@ -19,6 +19,9 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(name = "username")
+    private String username;
+
     @Column(name = "firstName")
     private String firstName;
 
@@ -27,6 +30,9 @@ public class User implements Serializable {
 
     @Column(name = "jobTitle")
     private String jobTitle;
+
+    @Column(name = "status")
+    private boolean status;
 
     @Column(name = "addresses")
     @OneToMany(mappedBy = "userAccount", cascade = CascadeType.ALL)

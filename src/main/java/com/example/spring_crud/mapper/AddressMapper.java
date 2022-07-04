@@ -17,7 +17,7 @@ public class AddressMapper {
                 .address3(addressDTO.getAddress3())
                 .city(addressDTO.getCity())
                 .country(addressDTO.getCountry())
-                .userAccount(UserMapper.toUser(addressDTO.getUserAccount()))
+//                .userAccount(UserMapper.toUser(addressDTO.getUserAccount()))
                 .acctId(addressDTO.getAcctId())
                 .build();
     }
@@ -32,7 +32,7 @@ public class AddressMapper {
                 .address3(address.getAddress3())
                 .city(address.getCity())
                 .country(address.getCountry())
-                .userAccount(UserMapper.toUserDTO(address.getUserAccount()))
+//                .userAccount(UserMapper.toUserDTO(address.getUserAccount()))
                 .acctId(address.getAcctId())
                 .build();
     }
