@@ -17,7 +17,7 @@ public class UserMapper {
                 .firstName(userDTO.getFirstName())
                 .lastName(userDTO.getLastName())
                 .jobTitle(userDTO.getJobTitle())
-                .password(userDTO.getPassword())
+//                .password(userDTO.getPassword())
                 .username(userDTO.getUsername())
                 .addresses(AddressMapper.toAddresses(userDTO.getAddresses()))
                 .build();
@@ -32,10 +32,10 @@ public class UserMapper {
                 .id(user.getId())
                 .firstName(user.getFirstName())
                 .lastName(user.getLastName())
-                .password(user.getPassword())
+//                .password(user.getPassword())
                 .username(user.getUsername())
                 .jobTitle(user.getJobTitle())
-                .roles(user.getRoles().stream().map(Role::getName).collect(Collectors.toSet()))
+//                .roles(user.getRoles().stream().map(Role::getName).collect(Collectors.toSet()))
                 .addresses(AddressMapper.toAddressDTOs(user.getAddresses()))
                 .build();
     }
