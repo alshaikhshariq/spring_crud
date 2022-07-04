@@ -8,18 +8,17 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-@Service("userDetailsService")
-public class UserDetailServiceImpl implements UserDetailService {
+import java.util.ArrayList;
+
+@Service
+public class UserDetailServiceImpl implements UserDetailsService {
 
     @Autowired
     private UserRepository userRepository;
-//    @Autowired
-//    private PermissionSetRepository permissionSetRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-//        User user = userRepository.findByUserNameFetchRoles(username);
         User user = userRepository.findByUsername(username);
         if (user == null) {
             throw new UsernameNotFoundException("User not found with username: " + username);
@@ -29,6 +28,6 @@ public class UserDetailServiceImpl implements UserDetailService {
         /*Set<String> libraryPermissions = permissions.stream().flatMap(p -> p.getComponentLibraries().stream())
                 .map(c -> c.getComponentName()).collect(Collectors.toSet());*/
         return UserDetailsImpl.build(user);
-    }
 
+    }
 }

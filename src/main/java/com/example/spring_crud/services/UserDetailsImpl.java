@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-@Service
 public class UserDetailsImpl implements UserDetails {
     private static final long serialVersionUID = 1L;
 
@@ -25,22 +24,31 @@ public class UserDetailsImpl implements UserDetails {
 
     private Collection<? extends GrantedAuthority> authorities;
 
-    public UserDetailsImpl(Long id, String username, String email, String password, User user) {
+    public UserDetailsImpl(Long id, String username, String email, User user, String password, Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
         this.username = username;
         this.email = email;
-        this.password = password;
         this.user = user;
+        this.password = password;
+        this.authorities = authorities;
     }
 
     public static UserDetailsImpl build(User user) {
+        List<GrantedAuthority> authorities = user.getRoles().stream()
+                .map(role -> new SimpleGrantedAuthority(role.getName()))
+                .collect(Collectors.toList());
+
+        /*for (String permission : getPermissions(user)) {
+            authorities.add(new SimpleGrantedAuthority(permission));
+        }*/
 
         return new UserDetailsImpl(
                 user.getId(),
                 user.getUsername(),
-                user.getFirstName(),
-                user.getLastName(),
-                user);
+                user.getStatus(),
+                user,
+                user.getPassword(),
+                authorities);
     }
 
     @Override
